@@ -1,0 +1,5 @@
+*.o
+*.sym
+*.map
+*.map
+*.lst
