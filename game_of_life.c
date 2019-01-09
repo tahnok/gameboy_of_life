@@ -14,7 +14,6 @@ BG: 20 tiles wide, 18 high
 
 void setup();
 void loop();
-void setState(UBYTE x, UBYTE y, BOOLEAN state);
 
 unsigned char gameboard[] =
 {
@@ -57,22 +56,15 @@ void setup() {
 
 BOOLEAN toggle = TRUE;
 void loop() {
-    UBYTE x = 0;
-    UBYTE y = 0;
-        gameboard[17 * WIDTH] = toggle;
-        setState(0, 17, toggle);
-    // for (x = 0; x < WIDTH; x++)
-    // {
-    //     setState(x, y, toggle);
-    // }
-    // x = 0;
-    // for (y = 0; y < 14; y++)
-    // {
-    //     setState(x, y, toggle);
-    // }
+    UWORD y = 0;
+    UWORD x = 0;
+    for (y = 0; y < HEIGHT; y++)
+    {
+        for (x = 0; x < WIDTH; x++)
+        {
+            gameboard[y * WIDTH + x] = toggle;
+        }
+    }
     toggle = !toggle;
-}
-
-void setState(UBYTE x, UBYTE y, BOOLEAN state) {
-    gameboard[y * WIDTH + x] = state;
+    x++;
 }
