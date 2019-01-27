@@ -41,8 +41,8 @@ unsigned char board1[] =
 };
 unsigned char board2[WIDTH * HEIGHT];
 
-unsigned char* current_board = &board1;
-unsigned char* next_board = &board2;
+unsigned char* current_board = (unsigned char*) &board1;
+unsigned char* next_board = (unsigned char*) &board2;
 
 void main()
 {
@@ -93,12 +93,12 @@ void loop_over_cells()
 }
 
 void swap_boards() {
-    if(current_board == &board1) {
-        current_board = &board2;
-        next_board = &board1;
+    if(current_board == (unsigned char*) &board1) {
+        current_board = (unsigned char*) &board2;
+        next_board = (unsigned char*) &board1;
     } else {
-        current_board = &board1;
-        next_board = &board2;
+        current_board = (unsigned char*) &board1;
+        next_board = (unsigned char*) &board2;
     }
 }
 
@@ -112,9 +112,9 @@ void apply_rule() {
     UBYTE live_neighbors = live_neighbours();
         // next_board[index] = 1 + live_neighbors;
     if (live_neighbors == 3 || (current_board[index] && live_neighbors == 2)) {
-        next_board[index] = TRUE;
+        next_board[index] = 0x01;
     } else {
-        next_board[index] = FALSE;
+        next_board[index] = 0x00;
     }
 }
 
